@@ -71,7 +71,7 @@ vim.lsp.config('clangd', {
         "--header-insertion=iwyu", "--completion-style=detailed",
         "--function-arg-placeholders", "--fallback-style=llvm"
     },
-    filetypes = {'c', 'cpp'},
+    filetypes = {'c', 'cpp', 'h', 'hpp'},
     root_markers = {'compile_commands.json'},
     capabilities = {
         textDocument = {
@@ -87,8 +87,9 @@ cmp.setup({
     sources = {{name = 'nvim_lsp'}, {name = 'buffer'}},
     snippet = {expand = function(args) vim.snippet.expand(args.body) end},
     mapping = cmp.mapping.preset.insert({
-        ['<CR>'] = cmp.mapping.confirm({select = true})
-    })
+        ['<CR>'] = cmp.mapping.confirm({select = false})
+    }),
+    completion = {autocomplete = false}
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
