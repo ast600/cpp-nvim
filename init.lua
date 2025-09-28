@@ -39,6 +39,8 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files,
                {desc = 'Telescope find files'})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep,
                {desc = 'Telescope live grep'})
+vim.keymap.set('n', '<leader>fs', builtin.git_status,
+               {desc = 'Telescope git status'})
 
 require("fidget").setup {
     notification = {window = {align = "top", winblend = 0}}
@@ -101,5 +103,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.filetype
     .add({extension = {asm = 'nasm'}, filename = {['.bashrc'] = 'bash'}})
+
+vim.opt.grepprg =
+    "grep --recursive --with-filename --line-number --color=never --exclude-dir='.git' --exclude-dir='build'"
+vim.opt.grepformat = '%f:%l:%m'
 
 require('gitsigns').setup()
